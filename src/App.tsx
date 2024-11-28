@@ -1,11 +1,10 @@
 import './App.scss';
+import MainNavigation from './routes/MainNavigation';
 
 function App() {
 
   return (
-    <>
-      Hello World
-    </>
+    <MainNavigation />
   );
 }
 
