@@ -1,0 +1,189 @@
+@import '../../styles/all';
+
+.login {
+    min-height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    overflow-x: hidden;
+
+    .login-left {
+        padding: 0 5%;
+
+        .login-content {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            justify-content: center;
+
+            .logo-content {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+                .logo {
+                    width: 40px;
+                }
+            }
+
+            .header-section {
+
+                .header {
+                    text-align: center;
+                    font-size: 30px;
+                    color: $black;
+                    font-family: $primary-font;
+                    font-weight: bold;
+                }
+
+                .subheader {
+                    text-align: center;
+                    font-family: $primary-font;
+                    color: $gray;
+                    margin-bottom: 20px;
+                }
+            }
+
+            .form {
+                .questionText {
+                    text-align: center;
+                    margin-top: 10px;
+                    color: $gray;
+                    font-family: $third-font;
+                    font-size: 12px;
+
+                    span {
+                        color: $black;
+                        font-weight: bold;
+                    }
+                }
+
+                .control-button {
+                    width: 100%;
+                    padding: 2%;
+                }
+
+                .error-text {
+                    color: red;
+                }
+
+                .instruction-text {
+                    margin-bottom: 10px;
+                    color: $gray;
+                    font-family: $third-font;
+                    font-size: 12px;
+                }
+
+                .text-field {
+                    width: 100%;
+                    margin-bottom: 10px;
+
+                    &::placeholder {
+                        font-family: $primary-font;
+                    }
+                }
+            }
+
+
+        }
+
+        .left-footer {
+            width:50%;
+            display: flex;
+            align-items: center;
+            padding: 1% 2%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            justify-content: space-between;
+
+            .left {
+
+                .link {
+                    color: $gray;
+                    font-family: $third-font;
+                }
+            }
+
+            .right {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 15px;
+
+                .link {
+                    color: $gray;
+                    font-family: $third-font;
+                }
+            }
+        }
+    }
+
+    .login-right {
+        position: relative;
+        min-height: 100vh;
+        width: 100%;
+        background-image: url('https://img.freepik.com/premium-photo/pastel-tone-purple-pink-blue-gradient-defocused-abstract-photo-smooth-lines-pantone-color-background_49683-4613.jpg');
+        // background-image: url('https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2654.jpg?t=st=1732790986~exp=1732794586~hmac=44582ef0566fb235146fa370cf4087a82044eee082855a708d40d9336a7b2ae6&w=996');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 0 15%;
+        gap: 30px;
+
+        .logo-container {
+            background-color: $white;
+            border-radius: 100%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .logo-img {
+                height: 40px;
+                width: 40px;
+            }
+        }
+
+        .right-header {
+            color: $black;
+            font-size: 3.5vw;
+            font-weight: bold;
+            line-height: 50px;
+            font-family: $primary-font;
+        }
+
+        .right-para {
+            color: $gray;
+            font-family: $third-font;
+        }
+
+        .curlyarrow {
+            position: absolute;
+            left: -50px;
+            bottom: 80px;
+            width: 200px;
+        }
+
+        .right-users {
+            margin-top: -20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 25px;
+            
+            .users-text {
+                color: $gray;
+                font-family: $third-font;
+            }
+        }
+    }
+}
