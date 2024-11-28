@@ -11,11 +11,11 @@ const RegisterPage = (props: RegisterPageProps) => {
 
   return (
 
-    <div className='login'>
+    <div className='register'>
       
-      <div className="login-left">
+      <div className="register-left">
 
-        <div className="login-content">
+        <div className="register-content">
           
           <div className="logo-content">
             <img src={logo} alt="logo" className="logo" />
@@ -74,7 +74,7 @@ const RegisterPage = (props: RegisterPageProps) => {
         
       </div>
       
-      <div className="login-right">
+      <div className="register-right">
 
         <img src={curlyarrow} alt="curlyarrow" className="curlyarrow" />
 

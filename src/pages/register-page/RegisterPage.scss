@@ -1,6 +1,6 @@
 @import "../../styles/all";
 
-.login {
+.register {
   min-height: 100vh;
   width: 100%;
   display: grid;
@@ -11,7 +11,7 @@
     grid-template-columns: 1fr;
   }
 
-  .login-left {
+  .register-left {
     padding: 0 5%;
 
     @media screen and (max-width: $mobile-portrait) {
@@ -22,7 +22,7 @@
         padding: 10% 5%;;
     }
 
-    .login-content {
+    .register-content {
       max-width: 400px;
       margin: 0 auto;
       display: flex;
@@ -143,7 +143,7 @@
     }
   }
 
-  .login-right {
+  .register-right {
     position: relative;
     min-height: 100vh;
     width: 100%;
