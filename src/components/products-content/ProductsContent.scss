@@ -1,0 +1,180 @@
+@import '../../styles/all';
+
+.products-content {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    padding: 2% 5%;
+
+    .products-content-inner {
+        max-width: 1300px;
+        margin: 0 auto;
+        min-height: calc(100vh - 80px);
+
+        @media screen and (max-width: $laptops) {
+            max-width: $max-width;
+        }
+
+        .products-upper {
+
+        }
+
+        .hr {
+
+        }
+
+        .products-center {
+            width: 100%;
+            padding: 1% 0;
+            display: grid;
+            padding-bottom: 2%;
+            grid-template-columns: repeat(2, 1fr);
+
+            @media screen and (max-width: $mobile) {
+                grid-template-columns: 1fr;
+            }
+
+            .center-left {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .center-title {
+                    font-family: $primary-font;
+                    font-weight: bold;
+                    font-size: 30px;
+
+                    @media screen and (max-width: $mobile-portrait) {
+                        font-size: 25px;
+                    }
+                }
+
+                .center-subheader {
+                    font-family: $third-font;
+                    color: $gray;
+
+                    span {
+                        color: $black;
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            .center-right {
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-end;
+
+                .center-right-subheader {
+                    font-family: $third-font;
+                    color: $gray;
+                    
+                    @media screen and (max-width: $mobile) {
+                        display: none;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+        
+        .products-lower {
+            width: 100%;
+            min-height: 10vh;
+
+            .products-section {
+                width: 100%;
+                min-height: 50vh;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+
+                @media screen and (max-width: $mobile-portrait) {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                
+                @media screen and (max-width: $mobile) {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+
+                .product {
+                    width: 100%;
+                    border-radius: 0.5rem;
+
+                    .product-image {
+                        height: 250px !important;
+                        object-fit: cover;
+                        border-radius: 0.5rem;
+                    }
+
+                    .product-content {
+
+                        .product-upper {
+                            display: flex;
+                            align-items: center;
+                            padding: 1% 0;
+                            justify-content: space-between;
+
+                            .name, .price {
+                                font-family: $primary-font;
+                                font-weight: bold;
+                            }
+                        }
+
+                        .product-center {
+
+                            .description {
+                                color: $gray;
+                                font-size: 12px;
+                                font-family: $third-font;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+                        }
+
+                        .product-lower {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            padding-top: 1%;
+
+                            .add-cart-buttons-section {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                            
+                                .add-btn {
+                                    font-size: 14px;
+                                    font-family: $secondary-font;
+                                
+                                    @media screen and (max-width: $laptops) {
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+
+                            .add-cart-button-section {
+                                display: flex;
+                                justify-content: flex-end;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .not-found-data {
+                width: 100%;
+                height:50vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .anim {
+                    width: 200px;
+                    height: 200px;
+                }
+            }
+        }
+    }
+}
