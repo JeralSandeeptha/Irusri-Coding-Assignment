@@ -4,6 +4,7 @@ import Lottie from 'lottie-react';
 import animationData from "../../assets/lotties/no-data.json";
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { useState } from 'react';
 
 const ProductsContent = (props: ProductsContentComponentPorps) => {
     
@@ -44,6 +45,31 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
             "image": "https://images.unsplash.com/photo-1527800792452-506aacb2101f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         }
     ]
+
+    // State for product quantities
+    const [quantities, setQuantities] = useState<{ [key: number]: number }>(
+        products.reduce((acc, product) => ({ ...acc, [product.id]: 0 }), {})
+    );
+
+    // Increment quantity
+    const handleIncrement = (id: number) => {
+        setQuantities((prev: any) => ({ ...prev, [id]: prev[id] + 1 }));
+    };
+
+    // Decrement quantity
+    const handleDecrement = (id: number) => {
+        setQuantities((prev: any) => ({
+            ...prev,
+            [id]: Math.max(0, prev[id] - 1), // Prevent negative quantities
+        }));
+    };
+
+    // Add to cart action
+    const handleAddToCart = (id: number) => {
+        const quantity = quantities[id];
+        console.log(`Adding product ID ${id} with quantity ${quantity} to the cart`);
+        // Perform the Add to Cart logic here
+    };
     
     return (
         <div className='products-content'>
@@ -86,12 +112,18 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
                                                 </div>
                                                 <div className="product-lower">
                                                     <div className="add-cart-buttons-section">
-                                                        <Button variant="outlined" size="small" className='add-btn'>-</Button>
-                                                        <h5 className='add-btn'>18</h5>
-                                                        <Button variant="outlined" size="small" className='add-btn'>+</Button>
+                                                        <Button variant="outlined" size="small" className='add-btn' onClick={() => {
+                                                            handleDecrement(product.id);
+                                                        }}>-</Button>
+                                                        <h5 className='add-btn'>{quantities[product.id]}</h5>
+                                                        <Button variant="outlined" size="small" className='add-btn' onClick={() => {
+                                                            handleIncrement(product.id);
+                                                        }}>+</Button>
                                                     </div>
                                                     <div className="add-cart-button-section">
-                                                        <Button variant="contained" size="small" className='add-btn'>Add cart</Button>
+                                                        <Button variant="contained" size="small" className='add-btn' onClick={() => {
+                                                            handleAddToCart(product.id);
+                                                        }}>Add cart</Button>
                                                     </div>
                                                 </div>
                                             </div>
