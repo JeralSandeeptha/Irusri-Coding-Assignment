@@ -1,0 +1,169 @@
+@import '../../styles/all';
+
+.cart-content {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    padding: 2% 5%;
+
+    .cart-content-inner {
+        max-width: 1300px;
+        margin: 0 auto;
+
+        @media screen and (max-width: $laptops) {
+            max-width: $max-width;
+        }
+
+        .hr {
+            margin-bottom: 20px;
+        }
+
+        .cart-center {
+            width: 100%;
+            padding: 1% 0;
+            display: grid;
+            padding-bottom: 2%;
+            grid-template-columns: repeat(2, 1fr);
+
+            @media screen and (max-width: $mobile) {
+                grid-template-columns: 1fr;
+            }
+
+            .center-left {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .center-title {
+                    font-family: $primary-font;
+                    font-weight: bold;
+                    font-size: 30px;
+
+                    @media screen and (max-width: $mobile-portrait) {
+                        font-size: 25px;
+                    }
+                }
+
+                .center-subheader {
+                    font-family: $third-font;
+                    color: $gray;
+
+                    span {
+                        color: $black;
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            .center-right {
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-end;
+
+                .center-right-subheader {
+                    font-family: $third-font;
+                    color: $gray;
+                    
+                    @media screen and (max-width: $mobile) {
+                        display: none;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+
+        .cart-content-products {
+            display: grid;
+            grid-template-columns: 3.5fr 1.5fr;
+            gap: 10px;
+
+            @media screen and (max-width: $mobile-portrait) {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-content-left-products {
+
+                .products {
+
+                }
+
+                .not-found-data {
+                    width: 100%;
+                    min-height:50vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    gap: 10px;
+    
+                    .anim {
+                        width: 200px;
+                        height: 200px;
+
+                        @media screen and (max-width: $laptops) {
+                            width: 150px;
+                            height: 150px;
+                        }
+                    }
+
+                    .cart-text {
+                        color: $black;
+                        font-family: $primary-font;
+                    }
+
+                    .control-button {
+                        max-width: 300px;
+                        width: 200px;
+                        padding: 2%;
+                    }
+                }
+            }
+
+            .cart-content-right-products {
+                background-color: rgb(243, 243, 243);
+                padding: 10px;
+                border-radius: $border-radius;
+                max-height: 200px;
+
+                .total-container {
+                    width: 100%;
+                    border-radius: $border-radius;
+                    // background-color: #e2e2e2;
+                    padding: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    gap: 20px;
+                    height: 100%;
+
+                    .cart-header {
+                        font-family: $primary-font;
+                        font-weight: bold;
+                        font-size: 25px;
+                    }
+
+                    .cart-amount {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        .amount-value {
+                            color: $black;
+                            font-family: $primary-font;
+                        }
+
+                        .amount-key {
+                            color: $black;
+                            font-family: $primary-font;
+                            font-weight: bold;
+                        }
+                    }
+
+                    .control-button {
+                        width: 100%;
+                        padding: 2%;
+                    }
+                }
+            }
+        }
+    }
+}
