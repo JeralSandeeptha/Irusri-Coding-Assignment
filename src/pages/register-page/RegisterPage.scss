@@ -1,7 +1,15 @@
 @import "../../styles/all";
 
+.alert-message {
+  position: fixed;
+  z-index: 100;
+  bottom: 20px;
+  right: 20px;
+}
+
 .register {
   min-height: 100vh;
+  position: relative;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -88,12 +96,25 @@
           font-size: 12px;
         }
 
-        .text-field {
-          width: 100%;
-          margin-bottom: 10px;
+        .text-input-container {
+          .text-field {
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
 
-          &::placeholder {
-            font-family: $primary-font;
+            &::placeholder {
+              font-family: $primary-font;
+            }
+          }
+
+          .error {
+            width: 100%;
+
+            .error-texts {
+              color: red;
+              font-size: 10px;
+            }
           }
         }
       }
