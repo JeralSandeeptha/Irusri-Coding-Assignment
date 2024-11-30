@@ -3,8 +3,9 @@ import './ProductsContent.scss';
 import Lottie from 'lottie-react';
 import animationData from "../../assets/lotties/no-data.json";
 import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, MenuItem, TextField } from '@mui/material';
 import { useState } from 'react';
+import filterIcon from '../../assets/icons/settings-sliders.png';
 
 const ProductsContent = (props: ProductsContentComponentPorps) => {
     
@@ -12,37 +13,42 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
         {
             "id": 1,
             "name": "Wireless Headphones",
-            "description": "High-quality wireless headphones with noise cancellation. Click the single product for more details. Thank you",
+            "description": "High-quality wireless headphones with noise cancellation. Click the single product for more details. Thank you. This is a awesome product.",
             "price": 99.99,
-            "image": "https://images.unsplash.com/photo-1676315636995-a5d5df17b192?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            "image": "https://images.unsplash.com/photo-1676315636995-a5d5df17b192?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "category":"earphone"
         },
         {
             "id": 2,
             "name": "Gaming Mouse",
             "description": "Ergonomic gaming mouse with customizable buttons. Click the single product for more details. Thank you. This is a awesome product.",
             "price": 49.99,
-            "image": "https://images.unsplash.com/photo-1632160871990-be30194885aa?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            "image": "https://images.unsplash.com/photo-1632160871990-be30194885aa?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "category":"mouse"
         },
         {
             "id": 3,
             "name": "Smartwatch",
             "description": "Feature-packed smartwatch with heart rate monitoring. Click the single product for more details. Thank you. This is a awesome product.",
             "price": 149.99,
-            "image": "https://images.unsplash.com/photo-1517502474097-f9b30659dadb?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            "image": "https://images.unsplash.com/photo-1517502474097-f9b30659dadb?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "category":"watch"
         },
         {
             "id": 4,
             "name": "Portable Charger",
             "description": "Compact 10000mAh portable charger for your devices. Click the single product for more details. Thank you. This is a awesome product.",
             "price": 29.99,
-            "image": "https://images.unsplash.com/photo-1706275787516-75a9b7ca7247?q=80&w=1885&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            "image": "https://images.unsplash.com/photo-1706275787516-75a9b7ca7247?q=80&w=1885&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "category":"chargers"
         },
         {
             "id": 5,
             "name": "4K Monitor",
             "description": "27-inch 4K UHD monitor with vibrant colors. Click the single product for more details. Thank you. This is a awesome product.",
             "price": 399.99,
-            "image": "https://images.unsplash.com/photo-1527800792452-506aacb2101f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            "image": "https://images.unsplash.com/photo-1527800792452-506aacb2101f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "category":"monitors"
         }
     ]
 
@@ -74,12 +80,6 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
     return (
         <div className='products-content'>
         <div className="products-content-inner">
-            
-            <div className="products-upper">
-                
-            </div>
-
-            <hr className='hr'/>
 
             <div className="products-center">
                 <div className="center-left">
@@ -87,7 +87,62 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
                     <h5 className="center-subheader">We found <span>242</span> products</h5>
                 </div>
                 <div className="center-right">
-                    <h5 className="center-right-subheader">Sort products</h5>
+                    <h5 className="center-right-subheader">Explore products</h5>
+                </div>
+            </div>
+
+            <hr className='hr'/>
+
+            <div className="products-upper">
+                <div className="search-fields">
+                    <div className="field">
+                        <h5 className="lable">Looking for</h5>
+                        <TextField
+                            label="Search product name"
+                            id="outlined-size-small"
+                            defaultValue=""
+                            size="small"
+                            className="text-field"
+                        />
+                    </div>
+                    <div className="field">
+                        <h5 className="lable">Category</h5>
+                        <TextField
+                            id="outlined-select-currency"
+                            select
+                            label="Select"
+                            defaultValue="EUR"
+                            size="small"
+                        >
+                            {products.map((option) => (
+                                <MenuItem key={option.id} value={option.id}>
+                                {option.name}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                    </div>
+                    <div className="field">
+                        <h5 className="lable">Price</h5>
+                        <TextField
+                            id="outlined-select-currency"
+                            select
+                            size="small"
+                            label="Select"
+                            defaultValue="EUR"
+                        >
+                            {products.map((option) => (
+                                <MenuItem key={option.id} value={option.id}>
+                                {option.name}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                    </div>
+                </div>
+                <div className="filter">
+                    <div className="filter-container">
+                        <img src={filterIcon} alt="filter-icon" className="icon"/>
+                        <h5 className="filter-text">Filter</h5>
+                    </div>
                 </div>
             </div>
             
