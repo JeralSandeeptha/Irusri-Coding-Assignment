@@ -1,13 +1,50 @@
 import './LoginPage.scss';
 import { LoginPageProps } from '../../types/pages';
 import { getCurrentYear } from '../../utils/getCurrentYear';
-import { Link } from 'react-router-dom';
-import { Avatar, AvatarGroup, Button, TextField } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import { Alert, Avatar, AvatarGroup, Backdrop, Button, CircularProgress, TextField } from '@mui/material';
 import cartLogo from '../../assets/svgs/approved.png';
 import curlyarrow from '../../assets/svgs/curl-arrow.png';
 import logo from '../../assets/icons/pfizer.png';
+import { useFormik } from 'formik';
+import { useState } from 'react';
+import * as Yup from 'yup';
+import loginUser from '../../services/user-service/loginUser';
+import CheckIcon from '@mui/icons-material/Check';
 
 const LoginPage = (props: LoginPageProps) => {
+
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  
+  const yupValidationSchema = Yup.object({
+    email: Yup.string().email('Invalid email format').required('Email is required'),
+    password: Yup.string()
+      .min(3, 'Password must be at least 3 characters')
+      .required('Password is required'),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: yupValidationSchema,
+    onSubmit: async (values) => {
+      console.log(values);
+      await loginUser({
+        values: values,
+        navigate: navigate,
+        setIsError: setIsError,
+        setIsSuccess: setIsSuccess,
+        setIsLoading: setIsLoading
+      });
+      formik.resetForm();
+    },
+  });
 
   return (
 
@@ -16,6 +53,29 @@ const LoginPage = (props: LoginPageProps) => {
       <div className="login-left">
 
         <div className="login-content">
+
+          <Backdrop
+            sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+            open={isLoading}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+
+          {
+            isError && (
+              <Alert className='alert-message' icon={<CheckIcon fontSize="inherit" />} severity="error">
+                Please try again later
+              </Alert>
+            )
+          }
+          
+          {
+            isSuccess && (
+              <Alert className='alert-message' icon={<CheckIcon fontSize="inherit" />} severity="success">
+                Login Successful
+              </Alert>
+            )
+          }
           
           <div className="logo-content">
             <img src={logo} alt="logo" className="logo" />
@@ -26,25 +86,45 @@ const LoginPage = (props: LoginPageProps) => {
             <h1 className="subheader">Login to your account</h1>
           </div>
 
-          <div className="form">
-            <TextField
-              label="Email Address"
-              id="outlined-size-small"
-              defaultValue=""
-              size="small"
-              className="text-field"
-            />
-            <TextField
-              label="Password"
-              id="outlined-size-small"
-              defaultValue=""
-              size="small"
-              className="text-field"
-            />
-            <Button variant="contained" size="small" className='control-button'>Login</Button>
+          <form onClick={formik.handleSubmit} className="form">
+            <div className="text-input-container">
+              <div className="error">
+                <h6 className="error-texts">
+                  {formik.touched.email && formik.errors.email}
+                </h6>
+              </div>
+              <TextField
+                label="Email Address"
+                id="outlined-size-small"
+                size="small"
+                className="text-field"
+                name="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+            </div>
+            <div className="text-input-container">
+              <div className="error">
+                <h6 className="error-texts">
+                  {formik.touched.password && formik.errors.password}
+                </h6>
+              </div>
+              <TextField
+                label="Password"
+                id="outlined-size-small"
+                size="small"
+                className="text-field"
+                name="password"
+                type="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+            </div>
+            <Button type="submit" variant="contained" size="small" className='control-button'>Login</Button>
             <h6 className="questionText">Didn't here before? <span><Link to='/register'>Register</Link></span></h6>
-          </div>
-
+          </form>
         </div>
 
         <div className="left-footer">
