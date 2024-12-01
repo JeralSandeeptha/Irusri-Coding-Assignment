@@ -10,20 +10,29 @@ import logout from '../../assets/icons/exit.png';
 import { routes } from '../../constants/constants';
 import gsap from 'gsap';
 import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { logOut } from '../../store/slices/authSlice';
 
 const Navbar = (props: NavbarComponentPorps) => {
 
-    const isLoggedIn = true;
     const mobileMenu = useRef(null);
     
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const logOut = () => {
+    const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+
+    const logOutUser = () => {
         const confirm: any = window.confirm('Are you sure want to logout?');
         if(confirm) {
-            console.log('Yes');
+            handleLogOut();
             navigate('/');
         }
+    }
+
+    const handleLogOut = () => {
+        dispatch(logOut());
     }
 
     const openNav = () => {
@@ -36,7 +45,7 @@ const Navbar = (props: NavbarComponentPorps) => {
             y: '-100vh',
         });
     }
-    
+
     return (
         <div className='navbar'>
             <div className="navbar-inner">
@@ -65,7 +74,7 @@ const Navbar = (props: NavbarComponentPorps) => {
                                             </Link>
                                         </Tooltip>
                                         <Tooltip title="Logout">
-                                            <div className="icon-container" onClick={logOut}>
+                                            <div className="icon-container" onClick={logOutUser}>
                                             <img src={logout} alt="logout-icon" className="icon"/>
                                             </div>
                                         </Tooltip>
@@ -84,7 +93,7 @@ const Navbar = (props: NavbarComponentPorps) => {
                                 </>
                             )
                         }
-                        <Tooltip title={isLoggedIn ? 'You are authenticated ' : 'You are loged as a quest'}>
+                        <Tooltip title={isLoggedIn ? 'You are authenticated' : 'You are loged as a guest'}>
                             <Avatar className='avatar'></Avatar>
                         </Tooltip>
                     </div>
@@ -117,7 +126,7 @@ const Navbar = (props: NavbarComponentPorps) => {
                                         </Link>
                                     </Tooltip>
                                     <Tooltip title="Logout">
-                                        <div className="icon-container" onClick={logOut}>
+                                        <div className="icon-container" onClick={logOutUser}>
                                         <img src={logout} alt="logout-icon" className="icon"/>
                                         </div>
                                     </Tooltip>
@@ -136,7 +145,7 @@ const Navbar = (props: NavbarComponentPorps) => {
                             </>
                         )
                     }
-                    <Tooltip title={isLoggedIn ? 'You are authenticated ' : 'You are loged as a quest'}>
+                    <Tooltip title={isLoggedIn ? 'You are authenticated' : 'You are loged as a guest'}>
                         <Avatar className='avatar'></Avatar>
                     </Tooltip>
                 </div>

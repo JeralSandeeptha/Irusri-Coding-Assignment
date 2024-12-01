@@ -11,11 +11,17 @@ import { useState } from 'react';
 import * as Yup from 'yup';
 import loginUser from '../../services/user-service/loginUser';
 import CheckIcon from '@mui/icons-material/Check';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store/store';
+import { logIn } from '../../store/slices/authSlice';
 
 const LoginPage = (props: LoginPageProps) => {
 
   const navigate = useNavigate();
 
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+  
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -26,6 +32,10 @@ const LoginPage = (props: LoginPageProps) => {
       .min(3, 'Password must be at least 3 characters')
       .required('Password is required'),
   });
+
+  const handleLogIn = () => {
+    dispatch(logIn());
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -40,7 +50,8 @@ const LoginPage = (props: LoginPageProps) => {
         navigate: navigate,
         setIsError: setIsError,
         setIsSuccess: setIsSuccess,
-        setIsLoading: setIsLoading
+        setIsLoading: setIsLoading,
+        handleLogIn: handleLogIn
       });
       formik.resetForm();
     },

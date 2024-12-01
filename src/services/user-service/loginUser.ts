@@ -25,6 +25,7 @@ const loginUser = async (props: LoginUserFunctionProps) => {
                         props.setIsSuccess(false);
                     }, 3000);
                     alert('Login successful!');
+                    props.handleLogIn();
                     props.navigate('/products');
                 } else {
                     alert('Password is incorrect. Please try again.');

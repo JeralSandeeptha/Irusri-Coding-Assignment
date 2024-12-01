@@ -13,5 +13,6 @@ export type LoginUserFunctionProps = {
     setIsError: Dispatch<SetStateAction<boolean>>
     setIsSuccess: Dispatch<SetStateAction<boolean>>
     values: any,
-    navigate: NavigateFunction
+    navigate: NavigateFunction,
+    handleLogIn: () => void
 }
