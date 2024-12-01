@@ -14,5 +14,6 @@ export type LoginUserFunctionProps = {
     setIsSuccess: Dispatch<SetStateAction<boolean>>
     values: any,
     navigate: NavigateFunction,
-    handleLogIn: () => void
+    handleLogIn: () => void,
+    handleCreateCart: () => void,
 }

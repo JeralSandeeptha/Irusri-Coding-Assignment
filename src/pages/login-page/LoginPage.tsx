@@ -14,6 +14,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
 import { logIn } from '../../store/slices/authSlice';
+import { createCart } from '../../store/slices/cartSlice';
 
 const LoginPage = (props: LoginPageProps) => {
 
@@ -36,6 +37,10 @@ const LoginPage = (props: LoginPageProps) => {
   const handleLogIn = () => {
     dispatch(logIn());
   };
+  
+  const handleCreateCart = () => {
+    dispatch(createCart());
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -51,7 +56,8 @@ const LoginPage = (props: LoginPageProps) => {
         setIsError: setIsError,
         setIsSuccess: setIsSuccess,
         setIsLoading: setIsLoading,
-        handleLogIn: handleLogIn
+        handleLogIn: handleLogIn,
+        handleCreateCart: handleCreateCart,
       });
       formik.resetForm();
     },

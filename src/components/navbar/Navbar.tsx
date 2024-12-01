@@ -13,6 +13,7 @@ import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { logOut } from '../../store/slices/authSlice';
+import { clearCart } from '../../store/slices/cartSlice';
 
 const Navbar = (props: NavbarComponentPorps) => {
 
@@ -33,6 +34,7 @@ const Navbar = (props: NavbarComponentPorps) => {
 
     const handleLogOut = () => {
         dispatch(logOut());
+        dispatch(clearCart());
     }
 
     const openNav = () => {

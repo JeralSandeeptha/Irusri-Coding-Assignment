@@ -26,6 +26,7 @@ const loginUser = async (props: LoginUserFunctionProps) => {
                     }, 3000);
                     alert('Login successful!');
                     props.handleLogIn();
+                    props.handleCreateCart();
                     props.navigate('/products');
                 } else {
                     alert('Password is incorrect. Please try again.');

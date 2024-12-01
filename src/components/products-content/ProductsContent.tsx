@@ -6,8 +6,15 @@ import { Link } from 'react-router-dom';
 import { Button, MenuItem, TextField } from '@mui/material';
 import { useState } from 'react';
 import filterIcon from '../../assets/icons/settings-sliders.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../../store/slices/cartSlice';
+import { Product } from '../../types/models';
+import { RootState } from '../../store/store';
 
 const ProductsContent = (props: ProductsContentComponentPorps) => {
+
+    const dispatch = useDispatch();
+    const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
     
     const products = [
         {
@@ -71,10 +78,19 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
     };
 
     // Add to cart action
-    const handleAddToCart = (id: number) => {
+    const handleAddToCart = (id: number, product: Product) => {
         const quantity = quantities[id];
-        console.log(`Adding product ID ${id} with quantity ${quantity} to the cart`);
-        // Perform the Add to Cart logic here
+        console.log(quantity);
+        if(isLoggedIn) {
+            if(quantity !== 0) {
+                console.log(`Adding product ID ${id} with quantity ${quantity} to the cart`);
+                dispatch(addToCart({ product, quantity }));
+            } else {
+                alert('Please put atleast one item');
+            }
+        } else {
+            alert('Please log in to your account before add products to the cart');
+        }
     };
     
     return (
@@ -177,7 +193,7 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
                                                     </div>
                                                     <div className="add-cart-button-section">
                                                         <Button variant="contained" size="small" className='add-btn' onClick={() => {
-                                                            handleAddToCart(product.id);
+                                                            handleAddToCart(product.id, product);
                                                         }}>Add cart</Button>
                                                     </div>
                                                 </div>
