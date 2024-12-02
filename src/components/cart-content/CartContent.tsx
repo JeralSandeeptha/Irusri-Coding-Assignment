@@ -97,7 +97,9 @@ const CartContent = (props: CartContentComponentPorps) => {
                           <>
                             <div className='product'>
                               <div className="one">
-                                <img src={product.image} alt="product-image" className="product-image" />
+                                <Link to={`/product/${product.id}`}>
+                                  <img src={product.image} alt="product-image" className="product-image" />
+                                </Link>
                                 <div className="product-details">
                                   <div className="product-name"><h5 className="product-text">{product.name}</h5></div>
                                   <div className="product-description"><h5 className="product-text">{product.description}</h5></div>

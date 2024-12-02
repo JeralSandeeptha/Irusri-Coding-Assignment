@@ -4,60 +4,20 @@ import Lottie from 'lottie-react';
 import animationData from "../../assets/lotties/no-data.json";
 import { Link } from 'react-router-dom';
 import { Button, MenuItem, TextField } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import filterIcon from '../../assets/icons/settings-sliders.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../store/slices/cartSlice';
 import { Product } from '../../types/models';
 import { RootState } from '../../store/store';
+import getAllProducts from '../../services/product-service/getAllProducts';
 
 const ProductsContent = (props: ProductsContentComponentPorps) => {
 
     const dispatch = useDispatch();
     const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
-    
-    const products = [
-        {
-            "id": 1,
-            "name": "Wireless Headphones",
-            "description": "High-quality wireless headphones with noise cancellation. Click the single product for more details. Thank you. This is a awesome product.",
-            "price": 99.99,
-            "image": "https://images.unsplash.com/photo-1676315636995-a5d5df17b192?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            "category":"earphone"
-        },
-        {
-            "id": 2,
-            "name": "Gaming Mouse",
-            "description": "Ergonomic gaming mouse with customizable buttons. Click the single product for more details. Thank you. This is a awesome product.",
-            "price": 49.99,
-            "image": "https://images.unsplash.com/photo-1632160871990-be30194885aa?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            "category":"mouse"
-        },
-        {
-            "id": 3,
-            "name": "Smartwatch",
-            "description": "Feature-packed smartwatch with heart rate monitoring. Click the single product for more details. Thank you. This is a awesome product.",
-            "price": 149.99,
-            "image": "https://images.unsplash.com/photo-1517502474097-f9b30659dadb?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            "category":"watch"
-        },
-        {
-            "id": 4,
-            "name": "Portable Charger",
-            "description": "Compact 10000mAh portable charger for your devices. Click the single product for more details. Thank you. This is a awesome product.",
-            "price": 29.99,
-            "image": "https://images.unsplash.com/photo-1706275787516-75a9b7ca7247?q=80&w=1885&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            "category":"chargers"
-        },
-        {
-            "id": 5,
-            "name": "4K Monitor",
-            "description": "27-inch 4K UHD monitor with vibrant colors. Click the single product for more details. Thank you. This is a awesome product.",
-            "price": 399.99,
-            "image": "https://images.unsplash.com/photo-1527800792452-506aacb2101f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            "category":"monitors"
-        }
-    ]
+
+    const [products, setProducts] = useState<Product[]>([]);
 
     // State for product quantities
     const [quantities, setQuantities] = useState<{ [key: number]: number }>(
@@ -66,7 +26,7 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
 
     // Increment quantity
     const handleIncrement = (id: number) => {
-        setQuantities((prev: any) => ({ ...prev, [id]: prev[id] + 1 }));
+        setQuantities((prev) => ({ ...prev, [id]: prev[id] ? prev[id] + 1 : 1 })); // Handle initial undefined value
     };
 
     // Decrement quantity
@@ -82,7 +42,7 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
         const quantity = quantities[id];
         console.log(quantity);
         if(isLoggedIn) {
-            if(quantity !== 0) {
+            if(quantity !== undefined && quantity !== 0) {
                 console.log(`Adding product ID ${id} with quantity ${quantity} to the cart`);
                 dispatch(addToCart({ product, quantity }));
                 alert(`Successfully added  ${product.name} with ${quantity} items to the cart`);
@@ -93,6 +53,16 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
             alert('Please log in to your account before add products to the cart');
         }
     };
+
+    const getProducts = async () => {
+        await getAllProducts({
+            setProducts: setProducts
+        });
+    }
+
+    useEffect(() => {
+        getProducts();
+    }, []);
     
     return (
         <div className='products-content'>
@@ -187,7 +157,7 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
                                                         <Button variant="outlined" size="small" className='add-btn' onClick={() => {
                                                             handleDecrement(product.id);
                                                         }}>-</Button>
-                                                        <h5 className='add-btn'>{quantities[product.id]}</h5>
+                                                        <h5 className='add-btn'>{quantities[product.id] || 0}</h5>
                                                         <Button variant="outlined" size="small" className='add-btn' onClick={() => {
                                                             handleIncrement(product.id);
                                                         }}>+</Button>
