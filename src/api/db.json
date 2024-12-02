@@ -32,15 +32,15 @@
       "description": "High-quality wireless headphones with noise cancellation. Click the single product for more details. Thank you. This is a awesome product.",
       "price": 99.99,
       "image": "https://images.unsplash.com/photo-1676315636995-a5d5df17b192?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "category": "earphone"
+      "category": "Electronics"
     },
     {
       "id": "2",
       "name": "Gaming Mouse",
       "description": "Ergonomic gaming mouse with customizable buttons. Click the single product for more details. Thank you. This is a awesome product.",
-      "price": 49.99,
+      "price": 799.99,
       "image": "https://images.unsplash.com/photo-1632160871990-be30194885aa?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "category": "mouse"
+      "category": "Electronics"
     },
     {
       "id": "3",
@@ -48,23 +48,39 @@
       "description": "Feature-packed smartwatch with heart rate monitoring. Click the single product for more details. Thank you. This is a awesome product.",
       "price": 149.99,
       "image": "https://images.unsplash.com/photo-1517502474097-f9b30659dadb?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "category": "watch"
+      "category": "Fashion"
     },
     {
       "id": "4",
       "name": "Portable Charger",
       "description": "Compact 10000mAh portable charger for your devices. Click the single product for more details. Thank you. This is a awesome product.",
-      "price": 29.99,
+      "price": 299.99,
       "image": "https://images.unsplash.com/photo-1706275787516-75a9b7ca7247?q=80&w=1885&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "category": "chargers"
+      "category": "Electronics"
     },
     {
       "id": "5",
       "name": "4K Monitor",
       "description": "27-inch 4K UHD monitor with vibrant colors. Click the single product for more details. Thank you. This is a awesome product.",
-      "price": 399.99,
+      "price": 2999.99,
       "image": "https://images.unsplash.com/photo-1527800792452-506aacb2101f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "category": "monitors"
+      "category": "Electronics"
+    },
+    {
+      "id": "6",
+      "name": "Baby Powder",
+      "description": "Buy your baby powder. Click the single product for more details. Thank you. This is a awesome product.",
+      "price": 29.99,
+      "image": "https://images.unsplash.com/photo-1572635196243-4dd75fbdbd7f?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "category": "Baby & Kids"
+    },
+    {
+      "id": "7",
+      "name": "Electric Guitar",
+      "description": "Guitar. Click the single product for more details. Thank you. This is a awesome product.",
+      "price": 5999.99,
+      "image": "https://images.unsplash.com/photo-1516924962500-2b4b3b99ea02?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "category": "Music"
     }
   ]
 }

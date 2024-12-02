@@ -11,6 +11,7 @@ import { addToCart } from '../../store/slices/cartSlice';
 import { Product } from '../../types/models';
 import { RootState } from '../../store/store';
 import getAllProducts from '../../services/product-service/getAllProducts';
+import { categories, priceRanges } from '../../constants/constants';
 
 const ProductsContent = (props: ProductsContentComponentPorps) => {
 
@@ -97,11 +98,11 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
                         <TextField
                             id="outlined-select-currency"
                             select
-                            label="Select"
+                            label="Select category"
                             defaultValue="EUR"
                             size="small"
                         >
-                            {products.map((option) => (
+                            {categories.map((option) => (
                                 <MenuItem key={option.id} value={option.id}>
                                 {option.name}
                                 </MenuItem>
@@ -114,10 +115,10 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
                             id="outlined-select-currency"
                             select
                             size="small"
-                            label="Select"
+                            label="Select price range"
                             defaultValue="EUR"
                         >
-                            {products.map((option) => (
+                            {priceRanges.map((option) => (
                                 <MenuItem key={option.id} value={option.id}>
                                 {option.name}
                                 </MenuItem>
