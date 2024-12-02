@@ -85,6 +85,7 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
             if(quantity !== 0) {
                 console.log(`Adding product ID ${id} with quantity ${quantity} to the cart`);
                 dispatch(addToCart({ product, quantity }));
+                alert(`Successfully added  ${product.name} with ${quantity} items to the cart`);
             } else {
                 alert('Please put atleast one item');
             }
@@ -100,7 +101,7 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
             <div className="products-center">
                 <div className="center-left">
                     <h2 className="center-title">Products Catelog</h2>
-                    <h5 className="center-subheader">We found <span>242</span> products</h5>
+                    <h5 className="center-subheader">We found <span>{products.length}</span> products</h5>
                 </div>
                 <div className="center-right">
                     <h5 className="center-right-subheader">Explore products</h5>

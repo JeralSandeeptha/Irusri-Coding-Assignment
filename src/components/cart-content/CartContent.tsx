@@ -4,6 +4,8 @@ import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import animationData from "../../assets/lotties/no-data.json";
 import Lottie from 'lottie-react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 const CartContent = (props: CartContentComponentPorps) => {
 
@@ -49,6 +51,16 @@ const CartContent = (props: CartContentComponentPorps) => {
           "category":"monitors"
       }
   ]
+
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  
+  console.log(localStorage.getItem('totalPrice'));
+
+  const items = JSON.parse(localStorage.getItem('cartItems'));
+  
+  const totalPriceString = localStorage.getItem('totalPrice');
+  const totalPriceNumber = parseFloat(totalPriceString);
+  const formattedTotalPrice = totalPriceNumber.toFixed(2);
     
   return (
     <div className='cart-content'>
@@ -57,7 +69,7 @@ const CartContent = (props: CartContentComponentPorps) => {
         <div className="cart-center">
             <div className="center-left">
                 <h2 className="center-title">Your Shopping Cart</h2>
-                <h5 className="center-subheader"><span>242</span> items in your cart</h5>
+                <h5 className="center-subheader"><span>{ localStorage.getItem('totalQuantity') }</span> items in your cart</h5>
             </div>
             <div className="center-right">
                 <h5 className="center-right-subheader">Purchase products</h5>
@@ -69,17 +81,44 @@ const CartContent = (props: CartContentComponentPorps) => {
         <div className="cart-content-products">
 
           <div className="cart-content-left-products">
-            {
-              products.length !== 0 ? (
-                <div className="products">
-                  {
-                    products.map((product) => {
-                      return (
-                        <div className='product'>{product.name}</div>
-                      )
-                    })
-                  }
-                </div>
+            <div className="cart-grid">
+              <div className="cart-header-section">
+                  <div className="one cart-header-textbox"><h5 className="cart-header-text ">Product</h5></div>
+                  <div className="two cart-header-textbox"><h5 className="cart-header-text">Price</h5></div>
+                  <div className="three cart-header-textbox"><h5 className="cart-header-text">Quantity</h5></div>
+                  <div className="four cart-header-textbox"><h5 className="cart-header-text">Total Price</h5></div>
+              </div>
+              {
+                items.length !== 0 ? (
+                  <div className="products">
+                    {
+                      items.map((product) => {
+                        return (
+                          <>
+                            <div className='product'>
+                              <div className="one">
+                                <img src={product.image} alt="product-image" className="product-image" />
+                                <div className="product-details">
+                                  <div className="product-name"><h5 className="product-text">{product.name}</h5></div>
+                                  <div className="product-description"><h5 className="product-text">{product.description}</h5></div>
+                                </div>
+                              </div>
+                              <div className="two">
+                                <h5 className="product-text">${ product.price }</h5>
+                              </div>
+                              <div className="three">
+                                <h5 className="product-text">{ product.quantity }</h5>
+                              </div>
+                              <div className="four">
+                                <h5 className="product-text">${ product.price * product.quantity }</h5>
+                              </div>
+                            </div>
+                            <hr className="hr" />
+                          </>
+                        )
+                      })
+                    }
+                  </div>
               ) : (
                 <div className="not-found-data">
                     <Lottie animationData={animationData} loop={true} className='anim'/>
@@ -90,6 +129,7 @@ const CartContent = (props: CartContentComponentPorps) => {
                 </div>
               )
             }
+            </div>
           </div>
 
           <div className="cart-content-right-products">
@@ -97,7 +137,7 @@ const CartContent = (props: CartContentComponentPorps) => {
               <h2 className="cart-header">Order Details</h2>
               <div className="cart-amount">
                 <h5 className='amount-key'>Cart Total</h5>
-                <h5 className='amount-value'>$67.50</h5>
+                <h5 className='amount-value'>$ {formattedTotalPrice}</h5>
               </div>
               <Button variant="contained" size="small" className='control-button'>Confirm Order</Button>
             </div>
