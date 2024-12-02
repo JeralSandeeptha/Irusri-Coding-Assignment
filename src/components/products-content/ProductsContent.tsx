@@ -19,7 +19,45 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
     const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
     const [products, setProducts] = useState<Product[]>([]);
+    
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [categoryId, setCategoryId] = useState('all');
+    const [priceRangeId, setPriceRangeId] = useState('all');
 
+    const filterProducts = (
+        products: Product[],
+        searchTerm: string,
+        categoryId: string,
+        priceRangeId: string
+    ): Product[] => {
+        return products.filter((product) => {
+            let shouldInclude = true;
+    
+            // Apply filters (logic updated above)
+            if (searchTerm) {
+                shouldInclude &&= product.name.toLowerCase().includes(searchTerm.toLowerCase());
+            }
+    
+            if (categoryId && categoryId !== 'all') {
+                const selectedCategory = categories.find((cat) => cat.id.toString() === categoryId)?.name;
+                if (selectedCategory) {
+                    shouldInclude &&= product.category === selectedCategory;
+                }
+            }
+    
+            if (priceRangeId && priceRangeId !== 'all') {
+                const selectedPriceRange = priceRanges.find((range) => range.id.toString() === priceRangeId);
+                if (selectedPriceRange) {
+                    const { min = 0, max = Infinity } = selectedPriceRange;
+                    shouldInclude &&= product.price >= min && product.price < max;
+                }
+            }
+    
+            return shouldInclude;
+        });
+    };    
+    
     // State for product quantities
     const [quantities, setQuantities] = useState<{ [key: number]: number }>(
         products.reduce((acc, product) => ({ ...acc, [product.id]: 0 }), {})
@@ -36,6 +74,21 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
             ...prev,
             [id]: Math.max(0, prev[id] - 1), // Prevent negative quantities
         }));
+    };
+
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedId = event.target.value;
+        setCategoryId(selectedId.toString());
+    }
+
+    const handlePriceRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedRange = event.target.value;
+        setPriceRangeId(selectedRange.toString());
+        console.log(selectedRange.toString());
     };
 
     // Add to cart action
@@ -64,6 +117,11 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
     useEffect(() => {
         getProducts();
     }, []);
+
+    useEffect(() => {
+        const filteredProducts = filterProducts(products, searchTerm, categoryId, priceRangeId);
+        setFilteredProducts(filteredProducts);
+    }, [products, searchTerm, categoryId, priceRangeId]);
     
     return (
         <div className='products-content'>
@@ -72,7 +130,7 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
             <div className="products-center">
                 <div className="center-left">
                     <h2 className="center-title">Products Catelog</h2>
-                    <h5 className="center-subheader">We found <span>{products.length}</span> products</h5>
+                    <h5 className="center-subheader">We found <span>{filteredProducts.length}</span> products</h5>
                 </div>
                 <div className="center-right">
                     <h5 className="center-right-subheader">Explore products</h5>
@@ -91,6 +149,8 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
                             defaultValue=""
                             size="small"
                             className="text-field"
+                            value={searchTerm}
+                            onChange={handleSearchChange}
                         />
                     </div>
                     <div className="field">
@@ -101,6 +161,8 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
                             label="Select category"
                             defaultValue="EUR"
                             size="small"
+                            value={categoryId}
+                            onChange={handleCategoryChange}
                         >
                             {categories.map((option) => (
                                 <MenuItem key={option.id} value={option.id}>
@@ -117,6 +179,8 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
                             size="small"
                             label="Select price range"
                             defaultValue="EUR"
+                            value={priceRangeId}
+                            onChange={handlePriceRangeChange}
                         >
                             {priceRanges.map((option) => (
                                 <MenuItem key={option.id} value={option.id}>
@@ -136,10 +200,10 @@ const ProductsContent = (props: ProductsContentComponentPorps) => {
             
             <div className="products-lower">
                 {
-                    products.length !== 0 ? (
+                    filteredProducts.length !== 0 ? (
                         <div className='products-section'>
                             {
-                                products.map((product) => {
+                                filteredProducts.map((product) => {
                                     return (
                                         <div key={product.id} className="product">
                                             <Link to={`/product/${product.id}`}>

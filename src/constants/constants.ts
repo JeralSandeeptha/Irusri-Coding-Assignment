@@ -21,15 +21,15 @@ export const categories = [
 ];
 
 export const priceRanges = [
-    { id: 1 , name: '$0 - $50' },
-    { id: 2 , name: '$50 - $100' },
-    { id: 3 , name: '$100 - $500' },
-    { id: 4 , name: '$500 - $1000' },
-    { id: 5 , name: '$1000 - $1500' },
-    { id: 6 , name: '$1500 - $2500' },
-    { id: 7 , name: '$2500 - $5000' },
-    { id: 8 , name: '$5000 - $10000' },
-    { id: 9 , name: '$10000+' },
+    { id: 1, name: '$0 - $50', min: 0, max: 50 },
+    { id: 2, name: '$50 - $100', min: 50, max: 100 },
+    { id: 3, name: '$100 - $500', min: 100, max: 500 },
+    { id: 4, name: '$500 - $1000', min: 500, max: 1000 },
+    { id: 5, name: '$1000 - $1500', min: 1000, max: 1500 },
+    { id: 6, name: '$1500 - $2500', min: 1500, max: 2500 },
+    { id: 7, name: '$2500 - $5000', min: 2500, max: 5000 },
+    { id: 8, name: '$5000 - $10000', min: 5000, max: 10000 },
+    { id: 9, name: '$10000+', min: 10000, max: Infinity },
 ];
 
 export const products = [
