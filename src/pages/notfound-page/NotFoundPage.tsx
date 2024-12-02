@@ -2,6 +2,7 @@ import { Button, Chip } from '@mui/material';
 import { NotFoundPageProps } from '../../types/pages'
 import './NotFoundPage.scss';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const NotFoundPage = (props: NotFoundPageProps) => {
 
@@ -14,6 +15,22 @@ const NotFoundPage = (props: NotFoundPageProps) => {
     
   return (
     <div className='not-found'>
+
+      <Helmet>
+        <title>Page Not Found - IruSri Assignment</title>
+        <meta
+            name="description"
+            content="The page you're looking for might have been removed, had its name changed, or is temporarily unavailable."
+        />
+        <meta name="robots" content="noindex, follow" />
+        <meta property="og:title" content="Page Not Found - IruSri Assignment" />
+        <meta
+            property="og:description"
+            content="We couldn't find the page you were looking for. Explore our homepage or use the search bar to find what you need."
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <div className="not-found-inner">
         <div className="badge">
           <h5 className="error-text">404 error</h5>

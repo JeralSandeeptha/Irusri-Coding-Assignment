@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
 import { logIn } from '../../store/slices/authSlice';
 import { createCart } from '../../store/slices/cartSlice';
+import { Helmet } from 'react-helmet';
 
 const LoginPage = (props: LoginPageProps) => {
 
@@ -66,6 +67,21 @@ const LoginPage = (props: LoginPageProps) => {
   return (
 
     <div className='login'>
+
+      <Helmet>
+          <title>Login - IruSri Products</title>
+          <meta
+              name="description"
+              content="Log in to your account on IruSri Products to purchase your products and stay productive. Access all features by signing in securely."
+          />
+          <meta name="robots" content="noindex, follow" />
+          <meta property="og:title" content="Login - IruSri Assignment" />
+          <meta
+              property="og:description"
+              content="Log in to your IruSri Products account and manage your tasks efficiently. Secure access to all features."
+          />
+          <meta property="og:type" content="website" />
+      </Helmet>
       
       <div className="login-left">
 
