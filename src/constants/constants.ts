@@ -7,6 +7,31 @@ export const routes: Route[] = [
     { id: 4, routeName: 'Contact', routePath: '/contact' },
 ];
 
+export const categories = [
+    { id: 1 , name: 'Electronics' },
+    { id: 2 , name: 'Fashion' },
+    { id: 3 , name: 'Home & Kitchen' },
+    { id: 4 , name: 'Beauty & Personal Care' },
+    { id: 5 , name: 'Music' },
+    { id: 6 , name: 'Toys & Games' },
+    { id: 7 , name: 'Books & Stationery' },
+    { id: 8 , name: 'Groceries' },
+    { id: 9 , name: 'Baby & Kids' },
+    { id: 10 , name: 'Others' },
+];
+
+export const priceRanges = [
+    { id: 1 , name: '$0 - $50' },
+    { id: 2 , name: '$50 - $100' },
+    { id: 3 , name: '$100 - $500' },
+    { id: 4 , name: '$500 - $1000' },
+    { id: 5 , name: '$1000 - $1500' },
+    { id: 6 , name: '$1500 - $2500' },
+    { id: 7 , name: '$2500 - $5000' },
+    { id: 8 , name: '$5000 - $10000' },
+    { id: 9 , name: '$10000+' },
+];
+
 export const products = [
     {
         "id": 1,
