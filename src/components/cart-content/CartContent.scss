@@ -12,6 +12,10 @@
         @media screen and (max-width: $laptops) {
             max-width: $max-width;
         }
+        
+        @media screen and (max-width: $mobile) {
+            padding-bottom: 5%;
+        }
 
         .hr {
             margin-bottom: 20px;
@@ -82,38 +86,130 @@
 
             .cart-content-left-products {
 
-                .products {
+                .cart-grid {
 
-                }
+                    .cart-header-section {
+                        width: 100%;
+                        background-color: rgb(245, 245, 245);
+                        border-radius: $border-radius;
+                        display: grid;
+                        padding: 10px 15px;
+                        grid-template-columns: 3fr 1fr 1fr 1fr;
 
-                .not-found-data {
-                    width: 100%;
-                    min-height:50vh;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-direction: column;
-                    gap: 10px;
-    
-                    .anim {
-                        width: 200px;
-                        height: 200px;
+                        .cart-header-textbox {
+                            text-align: center;
 
-                        @media screen and (max-width: $laptops) {
-                            width: 150px;
-                            height: 150px;
+                            .cart-header-text {
+                                color: $black;
+                                font-family: $primary-font;
+                                font-size: 14px;
+                                font-weight: 500;
+
+                                @media screen and (max-width: $mobile) {
+                                    font-size: 12px;
+                                }
+                            }
                         }
                     }
 
-                    .cart-text {
-                        color: $black;
-                        font-family: $primary-font;
+                    .products {
+
+                        .hr {
+                            margin-top: 20px;
+                        }
+
+                        .product {
+                            display: grid;
+                            grid-template-columns: 3fr 1fr 1fr 1fr;
+
+                            &:nth-child(1) {
+                                margin-top: 20px;
+                            }
+
+                            .one {
+                                display: grid;
+                                gap: 10px;
+                                grid-template-columns: 1fr 1fr;
+                                
+                                .product-image {
+                                    height: 130px;
+                                    object-fit: cover;
+                                    border-radius: $border-radius;
+                                }
+
+                                .product-details {
+
+                                    .product-name {
+                                        font-size: 14px;
+                                        font-weight: 500;
+
+                                        @media screen and (max-width: $mobile) {
+                                            font-size: 12px;
+                                        }
+                                    }
+
+                                    .product-description {
+                                        color: $gray;
+                                        font-size: 12px;
+                                        font-family: $third-font;
+                                        display: -webkit-box;
+                                        -webkit-line-clamp: 5;
+                                        -webkit-box-orient: vertical;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+
+                                        @media screen and (max-width: $mobile) {
+                                            font-size: 11px;
+                                        }
+                                    }
+                                }
+                            }
+                            .two, .three, .four {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                
+                                .product-text {
+                                    font-family: $third-font;
+                                    font-size: 13px;
+
+                                    @media screen and (max-width: $mobile) {
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+                        }
                     }
 
-                    .control-button {
-                        max-width: 300px;
-                        width: 200px;
-                        padding: 2%;
+                    .not-found-data {
+                        width: 100%;
+                        min-height:50vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        gap: 10px;
+        
+                        .anim {
+                            width: 200px;
+                            height: 200px;
+    
+                            @media screen and (max-width: $laptops) {
+                                width: 150px;
+                                height: 150px;
+                            }
+                        }
+    
+                        .cart-text {
+                            color: $black;
+                            font-family: $primary-font;
+                        }
+    
+                        .control-button {
+                            max-width: 300px;
+                            width: 200px;
+                            padding: 2%;
+                        }
                     }
                 }
             }
