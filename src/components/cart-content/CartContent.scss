@@ -96,6 +96,10 @@
                         padding: 10px 15px;
                         grid-template-columns: 3fr 1fr 1fr 1fr;
 
+                        @media screen and (max-width: $mobile) {
+                            display: none;
+                        }
+
                         .cart-header-textbox {
                             text-align: center;
 
@@ -122,6 +126,10 @@
                             position: relative;
                             display: grid;
                             grid-template-columns: 3fr 1fr 1fr 1fr;
+
+                            @media screen and (max-width: $mobile) {
+                                grid-template-columns: 3fr ;
+                            }
 
                             &:nth-child(1) {
                                 margin-top: 20px;
@@ -152,6 +160,11 @@
                                 }
 
                                 .product-details {
+                                    @media screen and (max-width: $mobile) {
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: flex-end;
+                                    }
 
                                     .product-name {
                                         font-size: 14px;
@@ -184,6 +197,11 @@
                                 justify-content: center;
                                 gap: 10px;
 
+                                @media screen and (max-width: $mobile) {
+                                    justify-content: flex-start;
+                                    margin-top: 10px;
+                                }
+
                                 .add-btn {
                                     
                                 }
@@ -191,6 +209,14 @@
                                 .product-text {
                                     font-family: $third-font;
                                     font-size: 13px;
+
+                                    span {
+                                        display: none;
+
+                                        @media screen and (max-width: $mobile) {
+                                            display: inline-block;
+                                        }
+                                    }
 
                                     @media screen and (max-width: $mobile) {
                                         font-size: 12px;

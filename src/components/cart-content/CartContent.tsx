@@ -125,7 +125,7 @@ const CartContent = (props: CartContentComponentPorps) => {
                               </div>
                             </div>
                             <div className="two">
-                              <h5 className="product-text">${formatToTwoDecimalPlaces(product.price)}</h5>
+                              <h5 className="product-text"><span>Unit Price:</span> ${formatToTwoDecimalPlaces(product.price)}</h5>
                             </div>
                             <div className="three">
                               <Button variant="outlined" size="small" className='add-btn' onClick={() => handleDecrement(product.id)}>-</Button>
@@ -133,7 +133,7 @@ const CartContent = (props: CartContentComponentPorps) => {
                               <Button variant="outlined" size="small" className='add-btn' onClick={() => handleIncrement(product.id)}>+</Button>
                             </div>
                             <div className="four">
-                              <h5 className="product-text">${product.price * product.quantity}</h5>
+                              <h5 className="product-text"><span>Total Price:</span> ${product.price * product.quantity}</h5>
                             </div>
                           </div>
                           <hr className="hr" />
