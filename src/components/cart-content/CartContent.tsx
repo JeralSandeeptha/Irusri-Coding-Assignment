@@ -145,7 +145,7 @@ const CartContent = (props: CartContentComponentPorps) => {
                   <div className="not-found-data">
                     <Lottie animationData={animationData} loop={true} className='anim'/>
                     <h5 className="cart-text">Your cart is empty</h5>
-                    <Link to='/products'>
+                    <Link to='/'>
                       <Button variant="contained" size="small" className='control-button'>Shop Products</Button>
                     </Link>
                   </div>

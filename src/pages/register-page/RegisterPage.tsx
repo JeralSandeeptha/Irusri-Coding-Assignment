@@ -183,7 +183,7 @@ const RegisterPage = (props: RegisterPageProps) => {
             <h6 className="questionText">
               Been here before?{' '}
               <span>
-                <Link to="/">Login</Link>
+                <Link to="/login">Login</Link>
               </span>
             </h6>
           </form>
