@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { useState, useEffect } from 'react';
 import { addToCart, removeFromCart } from '../../store/slices/cartSlice';
+import removeIcon from '../../assets/icons/cross.png';
 
 const CartContent = (props: CartContentComponentPorps) => {
 
@@ -64,6 +65,24 @@ const CartContent = (props: CartContentComponentPorps) => {
 
   const formattedTotalPrice = totalPrice.toFixed(2);
 
+  function formatToTwoDecimalPlaces(input: number): number {
+    const fixedPrice = input.toFixed(2);
+    return fixedPrice;
+  }
+
+  const handleRemoveProduct = (productId: string) => {
+    const isConfirmed = window.confirm('Are your sure want to remove this product from cart ?');
+    if (isConfirmed) {
+      const updatedItems = items.filter((item) => item.id !== productId); // Remove the product
+      const removedProduct = items.find((item) => item.id === productId);
+      const updatedPrice = removedProduct ? totalPrice - (removedProduct.price * removedProduct.quantity) : totalPrice;
+  
+      setItems(updatedItems); // Update state with filtered items
+      setTotalPrice(updatedPrice); // Update total price
+      dispatch(removeFromCart({ id: productId })); // Dispatch action to update the store
+    } 
+  }
+
   return (
     <div className='cart-content'>
       <div className='cart-content-inner'>
@@ -93,6 +112,9 @@ const CartContent = (props: CartContentComponentPorps) => {
                       items.map((product) => (
                         <>
                           <div key={product.id} className='product'>
+                            <Button variant="outlined" size="small" className='remove-btn' onClick={() => handleRemoveProduct(product.id)}>
+                              <img src={removeIcon} alt="close-icon" className="close-icon" />
+                            </Button>
                             <div className="one">
                               <Link to={`/product/${product.id}`}>
                                 <img src={product.image} alt="product-image" className="product-image" />
@@ -103,7 +125,7 @@ const CartContent = (props: CartContentComponentPorps) => {
                               </div>
                             </div>
                             <div className="two">
-                              <h5 className="product-text">${product.price}</h5>
+                              <h5 className="product-text">${formatToTwoDecimalPlaces(product.price)}</h5>
                             </div>
                             <div className="three">
                               <Button variant="outlined" size="small" className='add-btn' onClick={() => handleDecrement(product.id)}>-</Button>

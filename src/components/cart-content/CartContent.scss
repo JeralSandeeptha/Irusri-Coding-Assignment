@@ -119,11 +119,25 @@
                         }
 
                         .product {
+                            position: relative;
                             display: grid;
                             grid-template-columns: 3fr 1fr 1fr 1fr;
 
                             &:nth-child(1) {
                                 margin-top: 20px;
+                            }
+
+                            .remove-btn {
+                                position: absolute;
+                                right: 0;
+                                top: 0;
+                                width: 30px;
+                                height: 30px;
+
+                                .close-icon {
+                                    width: 8px;
+                                    height: 8px;
+                                }
                             }
 
                             .one {
