@@ -9,10 +9,10 @@ const MainNavigation = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' Component={LoginPage}/>
+        <Route path='/' Component={ProductsPage}/>
+        <Route path='/login' Component={LoginPage}/>
         <Route path='/register' Component={RegisterPage}/>
         <Route path='/cart' Component={CartPage}/>
-        <Route path='/products' Component={ProductsPage}/>
         <Route path='*' Component={NotFoundPage}/>
       </Routes>
     </BrowserRouter>

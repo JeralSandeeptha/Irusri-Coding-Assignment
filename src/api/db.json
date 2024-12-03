@@ -23,6 +23,12 @@
       "name": "Jeral Sandeeptha",
       "email": "jeral.sandeeptha1@gmail.com",
       "password": "Jeral@0529"
+    },
+    {
+      "id": "2336",
+      "name": "Yohan Sandeepa",
+      "email": "yohan.sandeepa@gmail.com",
+      "password": "Yohan@0529"
     }
   ],
   "products": [
@@ -38,7 +44,7 @@
       "id": "2",
       "name": "Gaming Mouse",
       "description": "Ergonomic gaming mouse with customizable buttons. Click the single product for more details. Thank you. This is a awesome product.",
-      "price": 799.99,
+      "price": 49.99,
       "image": "https://images.unsplash.com/photo-1632160871990-be30194885aa?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "category": "Electronics"
     },
@@ -54,7 +60,7 @@
       "id": "4",
       "name": "Portable Charger",
       "description": "Compact 10000mAh portable charger for your devices. Click the single product for more details. Thank you. This is a awesome product.",
-      "price": 299.99,
+      "price": 29.99,
       "image": "https://images.unsplash.com/photo-1706275787516-75a9b7ca7247?q=80&w=1885&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "category": "Electronics"
     },
@@ -62,7 +68,7 @@
       "id": "5",
       "name": "4K Monitor",
       "description": "27-inch 4K UHD monitor with vibrant colors. Click the single product for more details. Thank you. This is a awesome product.",
-      "price": 2999.99,
+      "price": 399.99,
       "image": "https://images.unsplash.com/photo-1527800792452-506aacb2101f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "category": "Electronics"
     },
@@ -78,7 +84,7 @@
       "id": "7",
       "name": "Electric Guitar",
       "description": "Guitar. Click the single product for more details. Thank you. This is a awesome product.",
-      "price": 5999.99,
+      "price": 599.99,
       "image": "https://images.unsplash.com/photo-1516924962500-2b4b3b99ea02?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "category": "Music"
     }

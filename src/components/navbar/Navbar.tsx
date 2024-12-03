@@ -35,6 +35,7 @@ const Navbar = (props: NavbarComponentPorps) => {
     const handleLogOut = () => {
         dispatch(logOut());
         dispatch(clearCart());
+        alert('You are successfully logout!');
     }
 
     const openNav = () => {
@@ -85,8 +86,8 @@ const Navbar = (props: NavbarComponentPorps) => {
                             ) : (
                                 <>
                                     <div className="non-auth-container">
-                                        <Link to='/'>
-                                            <Button variant="contained" size="small" className='control-button'>Login</Button>
+                                        <Link to='/login'>
+                                            <Button variant="outlined" size="small" className='control-button'>Login</Button>
                                         </Link>
                                         <Link to='/register'>
                                             <Button variant="outlined" size="small" className='control-button'>Register</Button>
@@ -137,7 +138,7 @@ const Navbar = (props: NavbarComponentPorps) => {
                         ) : (
                             <>
                                 <div className="non-auth-container">
-                                    <Link to='/'>
+                                    <Link to='/login'>
                                         <Button variant="contained" size="small" className='control-button'>Login</Button>
                                     </Link>
                                     <Link to='/register'>
