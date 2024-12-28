@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs "NodeJS-v22.11.0" // Use the NodeJS version configured in Jenkins
+        nodejs "NodeJS-Latest" // Use the NodeJS version configured in Jenkins
     }
     environment {
         CI = 'true' // Set CI environment variable
