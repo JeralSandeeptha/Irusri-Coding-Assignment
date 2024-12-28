@@ -3,6 +3,9 @@ pipeline {
     tools {
         nodejs "NodeJS-v22.11.0" // Use the NodeJS version configured in Jenkins
     }
+    environment {
+        CI = 'true' // Set CI environment variable
+    }
     stages {
         stage('Checkout Code') {
             steps {
