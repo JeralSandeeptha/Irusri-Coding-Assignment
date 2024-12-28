@@ -1,10 +1,10 @@
 pipeline {
     agent any
     tools {
-        nodejs "NodeJS-Latest" // Use the NodeJS version configured in Jenkins
+        nodejs "NodeJS-Latest"
     }
     environment {
-        CI = 'true' // Set CI environment variable
+        CI = 'true'
     }
     stages {
         stage('Checkout Code') {
