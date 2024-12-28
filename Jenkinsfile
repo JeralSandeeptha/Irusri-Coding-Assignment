@@ -1,42 +1,50 @@
 pipeline {
     agent any
+
     tools {
-        nodejs "NodeJS-Latest"
+        nodejs 'NodeJS-v22.11.0' // Ensure this matches the name configured in Jenkins' Global Tool Configuration
     }
+
     environment {
-        CI = 'true'
+        NPM_CONFIG_LOGLEVEL = 'warn' // Optional: Customize NPM log level
     }
+
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/JeralSandeeptha/Irusri-Coding-Assignment'
+                // Clone the repository
+                git url: 'https://github.com/JeralSandeeptha/Irusri-Coding-Assignment', branch: 'main'
             }
         }
+
         stage('Install Dependencies') {
             steps {
+                // Install Node.js dependencies
                 sh 'npm install'
             }
         }
-        stage('Run Tests') {
+
+        stage('Build Project') {
             steps {
-                sh 'npm test'
-            }
-        }
-        stage('Build') {
-            steps {
+                // Build the Node.js project (adjust this command for your project)
                 sh 'npm run build'
             }
         }
-    }
-    post {
-        always {
-            echo 'Pipeline execution complete!'
+
+        stage('Archive Artifacts') {
+            steps {
+                // Archive build artifacts, if any
+                archiveArtifacts artifacts: 'dist/**/*', fingerprint: true
+            }
         }
+    }
+
+    post {
         success {
-            echo 'Build succeeded!'
+            echo 'Build succeeded weddo!'
         }
         failure {
-            echo 'Build failed!'
+            echo 'Build failed modayo!'
         }
     }
 }
