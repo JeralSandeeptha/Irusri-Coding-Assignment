@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS-v22.11.0' // Ensure this matches the name configured in Jenkins' Global Tool Configuration
+        // nodejs 'NodeJS-v22.11.0' // Ensure this matches the name configured in Jenkins' Global Tool Configuration
+        nodejs 'nodejs' // Ensure this matches the name configured in Jenkins' Global Tool Configuration
     }
 
     environment {
