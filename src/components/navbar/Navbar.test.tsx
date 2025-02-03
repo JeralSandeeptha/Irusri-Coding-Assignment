@@ -4,10 +4,11 @@ import Navbar from './Navbar';
 import { BrowserRouter } from 'react-router-dom';
 import store from '../../store/store';
 import { Provider } from 'react-redux';
-import authReducer from '../../store/slices/authSlice';
+import authReducer, { logOut } from '../../store/slices/authSlice';
 import { configureStore } from '@reduxjs/toolkit';
+import { vi } from 'vitest';
 
-describe('Render Navbar component', () => {
+describe('Navbar Component', () => {
   
     test('Navbar component should be render', () => {
       render(
@@ -442,7 +443,7 @@ describe('Render Navbar component', () => {
         expect(window.location.pathname).toBe('/login');
     });
     
-    test('When the user click on the logout button pop up should be appear and go to the / path and cart and logout buttons should be not render', async () => {
+    test('When the user click on the logout button popup should be render', async () => {
         const mockStore = configureStore({
             reducer: {
               auth: authReducer,
@@ -460,11 +461,155 @@ describe('Render Navbar component', () => {
             </Provider>
         );
 
+        const confirmMock = vi.spyOn(window, "confirm");
+
+        // get the logout element
         const logoutEle = screen.getByTestId('logout');
+        // check logout button is in the dom
         expect(logoutEle).toBeInTheDocument();
-        fireEvent.mouseDown(logoutEle);
-        window.alert = jest.fn();
-        expect(window.alert).toHaveBeenCalledWith('You are successfully logout!');
-        expect(window.alert).toHaveBeenCalledTimes(1);
+        // click the logout button
+        await fireEvent.click(logoutEle);
+        // Ensure window.confirm was called
+        expect(confirmMock).toHaveBeenCalledTimes(1);
+        expect(confirmMock).toHaveBeenCalledWith("Are you sure want to logout?");
+        // Cleanup mock after test
+        confirmMock.mockRestore();
     });
-})
+    
+    test('When the user click on the logout button popup should be render, Then when the user click Cancle then isLoggedIn should be still true', async () => {
+        const mockStore = configureStore({
+            reducer: {
+              auth: authReducer,
+            },
+            preloadedState: {
+              auth: { isLoggedIn: true },
+            },
+        });
+        
+        render(
+            <Provider store={mockStore}>
+                <BrowserRouter>
+                    <Navbar />
+                </BrowserRouter>
+            </Provider>
+        );
+
+        const confirmMock = vi.spyOn(window, "confirm").mockReturnValue(false);
+
+        // get the logout element
+        const logoutEle = screen.getByTestId('logout');
+        // check logout button is in the dom
+        expect(logoutEle).toBeInTheDocument();
+        // click the logout button
+        await fireEvent.click(logoutEle);
+        // Ensure window.confirm was called
+        expect(confirmMock).toHaveBeenCalledTimes(1);
+        expect(confirmMock).toHaveBeenCalledWith("Are you sure want to logout?");
+        // still isLoggedIn variable value should be false
+        expect(mockStore.getState().auth.isLoggedIn).toBeTruthy();
+        // Cleanup mock after test
+        confirmMock.mockRestore();
+    });
+    
+    test('When the user click on the logout button popup should be render, Then when the user click OK then isLoggedIn should be still false', async () => {
+        const mockStore = configureStore({
+            reducer: {
+              auth: authReducer,
+            },
+            preloadedState: {
+              auth: { isLoggedIn: true },
+            },
+        });
+        
+        render(
+            <Provider store={mockStore}>
+                <BrowserRouter>
+                    <Navbar />
+                </BrowserRouter>
+            </Provider>
+        );
+
+        const confirmMock = vi.spyOn(window, "confirm").mockReturnValue(true);
+
+        // get the logout element
+        const logoutEle = screen.getByTestId('logout');
+        // check logout button is in the dom
+        expect(logoutEle).toBeInTheDocument();
+        // click the logout button
+        await fireEvent.click(logoutEle);
+        // Ensure window.confirm was called
+        expect(confirmMock).toHaveBeenCalledTimes(1);
+        expect(confirmMock).toHaveBeenCalledWith("Are you sure want to logout?");
+        // set the isLoggedIn variable false
+        mockStore.dispatch(logOut());
+        // still isLoggedIn variable value should be false
+        expect(mockStore.getState().auth.isLoggedIn).toBeFalsy();
+        // Cleanup mock after test
+        confirmMock.mockRestore();
+    });
+
+    test('When the user click logout success alert should be render', async () => {
+        const mockStore = configureStore({
+            reducer: {
+              auth: authReducer,
+            },
+            preloadedState: {
+              auth: { isLoggedIn: true },
+            },
+        });
+        
+        render(
+            <Provider store={mockStore}>
+                <BrowserRouter>
+                    <Navbar />
+                </BrowserRouter>
+            </Provider>
+        );
+
+        const confirmMock = vi.spyOn(window, "confirm").mockReturnValue(true);
+        const successMock = vi.spyOn(window, "alert").mockImplementation(() => true);
+
+        // get the logout element
+        const logoutEle = screen.getByTestId('logout');
+        // check logout button is in the dom
+        expect(logoutEle).toBeInTheDocument();
+        // click the logout button
+        await fireEvent.click(logoutEle);
+        // Ensure confirm window.confirm was called
+        expect(confirmMock).toHaveBeenCalledTimes(1);
+        expect(confirmMock).toHaveBeenCalledWith("Are you sure want to logout?");
+        // Ensure success window.confirm was called
+        expect(successMock).toHaveBeenCalledTimes(1);
+        expect(successMock).toHaveBeenCalledWith("You are successfully logout!");
+        // Cleanup mock after test
+        confirmMock.mockRestore();
+    });
+
+    test('When the user click logout user should navigate to the default route (/)', async () => {
+        const mockStore = configureStore({
+            reducer: {
+              auth: authReducer,
+            },
+            preloadedState: {
+              auth: { isLoggedIn: true },
+            },
+        });
+        
+        render(
+            <Provider store={mockStore}>
+                <BrowserRouter>
+                    <Navbar />
+                </BrowserRouter>
+            </Provider>
+        );
+
+        // get the logout element
+        const logoutEle = screen.getByTestId('logout');
+        // check logout button is in the dom
+        expect(logoutEle).toBeInTheDocument();
+        // click the logout button
+        await fireEvent.click(logoutEle);
+        // user should navigate to the default route
+        expect(window.location.pathname).toBe('/');;
+    });
+});

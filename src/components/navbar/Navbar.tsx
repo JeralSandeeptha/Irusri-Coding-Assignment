@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/icons/pfizer.png';
-import { NavbarComponentPorps } from '../../types/components';
 import './Navbar.scss';
 import { Avatar, Button, Tooltip } from '@mui/material';
 import cross from '../../assets/icons/cross.png';
@@ -15,7 +14,7 @@ import { RootState } from '../../store/store';
 import { logOut } from '../../store/slices/authSlice';
 import { clearCart } from '../../store/slices/cartSlice';
 
-const Navbar = (props: NavbarComponentPorps) => {
+const Navbar = () => {
 
     const mobileMenu = useRef(null);
     
@@ -25,7 +24,7 @@ const Navbar = (props: NavbarComponentPorps) => {
     const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
     const logOutUser = () => {
-        const confirm: any = window.confirm('Are you sure want to logout?');
+        const confirm = window.confirm('Are you sure want to logout?');
         if(confirm) {
             handleLogOut();
             navigate('/');

@@ -20,6 +20,7 @@
     "@mui/material": "^5.16.8",
     "@mui/styled-engine-sc": "^6.1.9",
     "@reduxjs/toolkit": "^2.4.0",
+    "@testing-library/user-event": "^14.6.1",
     "axios": "^1.7.8",
     "formik": "^2.4.6",
     "gsap": "^3.12.5",
