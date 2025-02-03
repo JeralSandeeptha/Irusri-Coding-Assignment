@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/icons/pfizer.png';
-import { NavbarComponentPorps } from '../../types/components';
 import './Navbar.scss';
 import { Avatar, Button, Tooltip } from '@mui/material';
 import cross from '../../assets/icons/cross.png';
@@ -15,7 +14,7 @@ import { RootState } from '../../store/store';
 import { logOut } from '../../store/slices/authSlice';
 import { clearCart } from '../../store/slices/cartSlice';
 
-const Navbar = (props: NavbarComponentPorps) => {
+const Navbar = () => {
 
     const mobileMenu = useRef(null);
     
@@ -25,7 +24,7 @@ const Navbar = (props: NavbarComponentPorps) => {
     const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
     const logOutUser = () => {
-        const confirm: any = window.confirm('Are you sure want to logout?');
+        const confirm = window.confirm('Are you sure want to logout?');
         if(confirm) {
             handleLogOut();
             navigate('/');
@@ -50,16 +49,16 @@ const Navbar = (props: NavbarComponentPorps) => {
     }
 
     return (
-        <div className='navbar'>
+        <div className='navbar' data-testid="navbar">
             <div className="navbar-inner">
 
-                <div className="mobile-navbar" ref={mobileMenu}>
+                <div className="mobile-navbar" ref={mobileMenu} data-testid="mobile-nav">
                     <img src={cross} alt="close" className="close" onClick={closeNav}/>
                     <div className="nav-links-container">
                         {
                             routes.map((route) => {
                                 return (
-                                    <Link key={route.id} className='navlink' to={route.routePath}>{route.routeName}</Link>
+                                    <Link key={route.id} className='navlink' to={route.routePath} data-testid="nav-link">{route.routeName}</Link>
                                 )
                             })
                         }
@@ -104,14 +103,14 @@ const Navbar = (props: NavbarComponentPorps) => {
 
                 <div className="nav-left">
                     <div className="logo-content">
-                        <img src={logo} alt="logo" className="logo" />
+                        <img src={logo} alt="logo" className="logo" data-testid='logo'/>
                     </div>
                 </div>
                 <div className="nav-center">
                     {
                         routes.map((route) => {
                             return (
-                                <Link key={route.id} className='navlink' to={route.routePath}>{route.routeName}</Link>
+                                <Link key={route.id} className='navlink' to={route.routePath} data-testid='nav-link'>{route.routeName}</Link>
                             )
                         })
                     }
@@ -121,16 +120,16 @@ const Navbar = (props: NavbarComponentPorps) => {
                         isLoggedIn ? (
                             <>
                                 <div className="auth-container">
-                                    <Tooltip title="View your cart">
+                                    <Tooltip title="View your cart" data-testid='tooltip-cart'>
                                         <Link to='/cart'>
                                             <div className="icon-container">
-                                                <img src={cart} alt="cart-icon" className="icon" />
+                                                <img src={cart} alt="cart-icon" className="icon" data-testid='cart'/>
                                             </div>
                                         </Link>
                                     </Tooltip>
-                                    <Tooltip title="Logout">
+                                    <Tooltip title="Logout" data-testid='tooltip-logout'>
                                         <div className="icon-container" onClick={logOutUser}>
-                                        <img src={logout} alt="logout-icon" className="icon"/>
+                                        <img src={logout} alt="logout-icon" className="icon" data-testid='logout'/>
                                         </div>
                                     </Tooltip>
                                 </div>
@@ -138,18 +137,18 @@ const Navbar = (props: NavbarComponentPorps) => {
                         ) : (
                             <>
                                 <div className="non-auth-container">
-                                    <Link to='/login'>
+                                    <Link to='/login' data-testid='login'>
                                         <Button variant="contained" size="small" className='control-button'>Login</Button>
                                     </Link>
-                                    <Link to='/register'>
+                                    <Link to='/register' data-testid='register'>
                                         <Button variant="outlined" size="small" className='control-button'>Register</Button>
                                     </Link>
                                 </div>
                             </>
                         )
                     }
-                    <Tooltip title={isLoggedIn ? 'You are authenticated' : 'You are loged as a guest'}>
-                        <Avatar className='avatar'></Avatar>
+                    <Tooltip data-testid="tooltip-avatar" title={isLoggedIn ? 'You are authenticated' : 'You are loged as a guest'}>
+                        <Avatar className='avatar' data-testid='avatar'></Avatar>
                     </Tooltip>
                 </div>
                 <img src={menu} alt="menu" className="menu" onClick={openNav}/>
