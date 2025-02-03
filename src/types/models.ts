@@ -2,6 +2,7 @@ export interface Route {
     id: number;
     routePath: string;
     routeName: string;
+    testid: string
 }
 
 export interface User {
