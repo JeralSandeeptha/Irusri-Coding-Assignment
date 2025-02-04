@@ -583,6 +583,7 @@ describe('Navbar Component', () => {
         expect(successMock).toHaveBeenCalledWith("You are successfully logout!");
         // Cleanup mock after test
         confirmMock.mockRestore();
+        successMock.mockRestore();
     });
 
     test('When the user click logout user should navigate to the default route (/)', async () => {
