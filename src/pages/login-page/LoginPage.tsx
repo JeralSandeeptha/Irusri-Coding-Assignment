@@ -1,5 +1,4 @@
 import './LoginPage.scss';
-import { LoginPageProps } from '../../types/pages';
 import { getCurrentYear } from '../../utils/getCurrentYear';
 import { Link, useNavigate } from 'react-router-dom';
 import { Alert, Avatar, AvatarGroup, Backdrop, Button, CircularProgress, TextField } from '@mui/material';
@@ -11,17 +10,15 @@ import { useState } from 'react';
 import * as Yup from 'yup';
 import loginUser from '../../services/user-service/loginUser';
 import CheckIcon from '@mui/icons-material/Check';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store/store';
+import { useDispatch } from 'react-redux';
 import { logIn } from '../../store/slices/authSlice';
 import { createCart } from '../../store/slices/cartSlice';
 import { Helmet } from 'react-helmet';
 
-const LoginPage = (props: LoginPageProps) => {
+const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   
   const [isLoading, setIsLoading] = useState(false);
@@ -66,7 +63,7 @@ const LoginPage = (props: LoginPageProps) => {
 
   return (
 
-    <div className='login'>
+    <div className='login' data-testid="login">
 
       <Helmet>
           <title>Login - IruSri Products</title>
@@ -111,18 +108,18 @@ const LoginPage = (props: LoginPageProps) => {
           }
           
           <div className="logo-content">
-            <img src={logo} alt="logo" className="logo" />
+            <img src={logo} alt="logo" className="logo" data-testid="logo"/>
           </div>
 
           <div className="header-section">
-            <h1 className="header">Welcome Back</h1>
-            <h1 className="subheader">Login to your account</h1>
+            <h1 className="header" data-testid="header">Welcome Back</h1>
+            <h1 className="subheader" data-testid="subheader">Login to your account</h1>
           </div>
 
           <form onClick={formik.handleSubmit} className="form">
             <div className="text-input-container">
               <div className="error">
-                <h6 className="error-texts">
+                <h6 className="error-texts" data-testid="email-validation">
                   {formik.touched.email && formik.errors.email}
                 </h6>
               </div>
@@ -135,11 +132,12 @@ const LoginPage = (props: LoginPageProps) => {
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                data-testid='email'
               />
             </div>
             <div className="text-input-container">
               <div className="error">
-                <h6 className="error-texts">
+                <h6 className="error-texts" data-testid="passsword-validation">
                   {formik.touched.password && formik.errors.password}
                 </h6>
               </div>
@@ -153,18 +151,19 @@ const LoginPage = (props: LoginPageProps) => {
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                data-testid='password'
               />
             </div>
-            <Button type="submit" variant="contained" size="small" className='control-button'>Login</Button>
-            <h6 className="questionText">Didn't here before? <span><Link to='/register'>Register</Link></span></h6>
+            <Button data-testid='loginBtn' type="submit" variant="contained" size="small" className='control-button'>Login</Button>
+            <h6 className="questionText" data-testid='screensplit'>Didn't here before? <span><Link to='/register' data-testid='registernavlink'>Register</Link></span></h6>
           </form>
         </div>
 
         <div className="left-footer">
           <div className="left">
-            <h5 className="link">© { getCurrentYear() } Company</h5>
+            <h5 className="link" data-testid="date">© { getCurrentYear() } Company</h5>
           </div>
-          <div className="right">
+          <div className="right" data-testid="terms">
             <h5 className="link">Term</h5>
             <h5 className="link">Privacy</h5>
           </div>
@@ -174,22 +173,22 @@ const LoginPage = (props: LoginPageProps) => {
       
       <div className="login-right">
 
-        <img src={curlyarrow} alt="curlyarrow" className="curlyarrow" />
+        <img data-testid="curlyarrow" src={curlyarrow} alt="curlyarrow" className="curlyarrow" />
 
         <div className="logo-container">
-          <img src={cartLogo} alt="logo-img" className="logo-img" />
+          <img src={cartLogo} alt="logo-img" className="logo-img" data-testid="logoimg"/>
         </div>
-        <h2 className="right-header">Purchase thousands of products</h2>
-        <h5 className="right-para">Join our platform to purchase thousands of highly valuable products in minutes.</h5>
+        <h2 className="right-header" data-testid="mainHeader">Purchase thousands of products</h2>
+        <h5 className="right-para" data-testid="mainHeader">Join our platform to purchase thousands of highly valuable products in minutes.</h5>
         <div className="right-users">
-          <AvatarGroup max={4}>
+          <AvatarGroup max={4} data-testid="avatarGroup">
             <Avatar alt="Remy Sharp" src="https://plus.unsplash.com/premium_photo-1689606093808-3cb4393248d2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
             <Avatar alt="Travis Howard" src="https://images.unsplash.com/photo-1685903772095-f07172808761?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
             <Avatar alt="Cindy Baker" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
             <Avatar alt="Trevor Henderson" src="https://images.unsplash.com/photo-1640960543409-dbe56ccc30e2?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
             <Avatar alt="Agnes Walker" src="https://images.unsplash.com/photo-1599110364868-364162848518?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
           </AvatarGroup>
-          <h5 className="users-text">
+          <h5 className="users-text" data-testid="usersText">
             Join 60,000+ users
           </h5>
         </div>
