@@ -1,10 +1,9 @@
-import { Button, Chip } from '@mui/material';
-import { NotFoundPageProps } from '../../types/pages'
+import { Button } from '@mui/material';
 import './NotFoundPage.scss';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-const NotFoundPage = (props: NotFoundPageProps) => {
+const NotFoundPage = () => {
 
   const navigate = useNavigate();
 
@@ -14,7 +13,7 @@ const NotFoundPage = (props: NotFoundPageProps) => {
   }
     
   return (
-    <div className='not-found'>
+    <div className='not-found' data-testid="notfound">
 
       <Helmet>
         <title>Page Not Found - IruSri Assignment</title>
