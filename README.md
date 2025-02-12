@@ -15,6 +15,7 @@ This repository contains the source code for a React application that integrates
 - [Project Structure](#project-structure)
 - [Available Scripts](#available-scripts)
 - [Technologies Used](#technologies-used)
+- [Test the Applcation](#testing)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -100,6 +101,19 @@ You can follow below instructions for the start the application.
 - Redux: For global state management 
 - MaterialUI, Tailwind: As component and UI libraries
 - GSAP: As an animation library
+
+## Test the Application
+
+- For setup cypress
+  ```bash
+  npm i cypress
+- For start cypress server
+  ```bash
+  npx cypress open
+- or we can use scripts 
+- If you get any errors while setup the components and E2E remove this and setup, after add that in the package.json file.
+  ```bash
+  "type": "module",
 
 ## Contributing
 
